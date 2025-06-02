@@ -1,0 +1,31 @@
+#!/bin/bash
+        
+#SBATCH -J cutadapt
+#SBATCH -o cutadapt.%j.out
+#SBATCH -e cutadapt.%j.err
+#SBATCH -A snp_calling_gatk_mil      
+#SBATCH --mail-user marine.salson@ird.fr
+#SBATCH --mail-type=FAIl,END
+#SBATCH -p fast
+#SBATCH -c 15
+
+cd /shared/projects/snp_calling_gatk_mil/mapping_new_ref/bwa_pennisetum_pedicellatum
+
+module load cutadapt/3.1
+
+#cutadapt sur SRR7440094 et SRR7440095 :
+
+cutadapt -j 15 -m 35 -q 20 -b AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT -b AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT -b agatcggaagagcggttcagcaggaatgccgagaccgatctcgtatgccgtcttctgcttg -b caagcagaagacggcatacgagatcggtctcggcattcctgctgaaccgctcttccgatct -b tctagccttctcgccaagtcgtccttacggctctggctagagcatacggcagaagacgaac -b gttcgtcttctgccgtatgctctagccagagccgtaaggacgacttggcgagaaggctaga -b AGATCGGAAGAGCACACGTCTGAACTCCAGTCACNNNNNNATCTCGTATGCCGTCTTCTGCTTG -b CAAGCAGAAGACGGCATACGAGATNNNNNNGTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT -b TCTAGCCTTCTCGTGTGCAGACTTGAGGTCAGTGNNNNNNTAGAGCATACGGCAGAAGACGAAC -b GTTCGTCTTCTGCCGTATGCTCTANNNNNNCACTGACCTCAAGTCTGCACACGAGAAGGCTAGA -b AATGATACGGCGACCACCGAGATCTACACNNNNNNNNACACTCTTTCCCTACACGACGCTCTTC -b GAAGAGCGTCGTGTAGGGAAAGAGTGTNNNNNNNNGTGTAGATCTCGGTGGTCGCCGTATCATT -b CAAGCAGAAGACGGCATACGAGATNNNNNNNNGTGACTGGAGTTCAGACGTGTgctcttccgatct -b agatcggaagagcACACGTCTGAACTCCAGTCACNNNNNNNNATCTCGTATGCCGTCTTCTGCTTG -b ttactatgccgctggtggctctagatgtgagaaagggatgtgctgcgagaaggctaga -b tctagccttctcgcagcacatccctttctcacatctagagccaccagcggcatagtaa -B AATGATACGGCGACCACCGAGATCTACACTCTTTCCCTACACGACGCTCTTCCGATCT -B AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT -B agatcggaagagcggttcagcaggaatgccgagaccgatctcgtatgccgtcttctgcttg -B caagcagaagacggcatacgagatcggtctcggcattcctgctgaaccgctcttccgatct -B tctagccttctcgccaagtcgtccttacggctctggctagagcatacggcagaagacgaac -B gttcgtcttctgccgtatgctctagccagagccgtaaggacgacttggcgagaaggctaga -B AGATCGGAAGAGCACACGTCTGAACTCCAGTCACNNNNNNATCTCGTATGCCGTCTTCTGCTTG -B CAAGCAGAAGACGGCATACGAGATNNNNNNGTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT -B TCTAGCCTTCTCGTGTGCAGACTTGAGGTCAGTGNNNNNNTAGAGCATACGGCAGAAGACGAAC -B GTTCGTCTTCTGCCGTATGCTCTANNNNNNCACTGACCTCAAGTCTGCACACGAGAAGGCTAGA -B AATGATACGGCGACCACCGAGATCTACACNNNNNNNNACACTCTTTCCCTACACGACGCTCTTC -B GAAGAGCGTCGTGTAGGGAAAGAGTGTNNNNNNNNGTGTAGATCTCGGTGGTCGCCGTATCATT -B CAAGCAGAAGACGGCATACGAGATNNNNNNNNGTGACTGGAGTTCAGACGTGTgctcttccgatct -B agatcggaagagcACACGTCTGAACTCCAGTCACNNNNNNNNATCTCGTATGCCGTCTTCTGCTTG -B ttactatgccgctggtggctctagatgtgagaaagggatgtgctgcgagaaggctaga -B tctagccttctcgcagcacatccctttctcacatctagagccaccagcggcatagtaa -o SRR7440095_CU_1.fastq.gz -p SRR7440095_CU_2.fastq.gz SRR7440095_1.fastq.gz SRR7440095_2.fastq.gz 2> cutadapt_SRR7440095.err > cutadapt_SRR7440095.log
+
+
+module unload fastqc
+
+module load fastqc/0.11.8
+
+gunzip SRR7440095*.fastq.gz
+fastqc -o fastqc -t 8 SRR7440095_1.fastq
+fastqc -o fastqc -t 8 SRR7440095_2.fastq
+
+fastqc -o fastqc -t 8 SRR7440095_CU_1.fastq
+fastqc -o fastqc -t 8 SRR7440095_CU_2.fastq
+

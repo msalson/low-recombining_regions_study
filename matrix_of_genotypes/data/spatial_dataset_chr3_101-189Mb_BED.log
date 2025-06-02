@@ -1,0 +1,28 @@
+PLINK v1.90b4 64-bit (20 Mar 2017)
+Options in effect:
+  --make-bed
+  --out cerao_chr3_101-189Mb_BED
+  --vcf cerao_chr3_101-189Mb.vcf
+
+Hostname: node17.alineos.net
+Working directory: /tmp/salson_plink
+Start time: Sat Feb 18 15:10:40 2023
+
+Random number seed: 1676729440
+144782 MB RAM detected; reserving 72391 MB for main workspace.
+--vcf: cerao_chr3_101-189Mb_BED-temporary.bed +
+cerao_chr3_101-189Mb_BED-temporary.bim + cerao_chr3_101-189Mb_BED-temporary.fam
+written.
+1000 variants loaded from .bim file.
+126 people (0 males, 0 females, 126 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to cerao_chr3_101-189Mb_BED.nosex .
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 126 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.819786.
+1000 variants and 126 people pass filters and QC.
+Note: No phenotypes present.
+--make-bed to cerao_chr3_101-189Mb_BED.bed + cerao_chr3_101-189Mb_BED.bim +
+cerao_chr3_101-189Mb_BED.fam ... done.
+
+End time: Sat Feb 18 15:10:40 2023
