@@ -1,0 +1,130 @@
+---
+title: "phenotypic_data"
+output: html_document
+date: '2022-07-06'
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+	echo = TRUE,
+	message = FALSE,
+	warning = FALSE
+)
+
+```
+
+### List of samples group based on kmean clustering base on PCA
+
+```{r}
+gpA<-c("So-21-29822-01","So-10-20006-02","So-10-20117-03","So-10-20327-01","So-10-20327-03","So-10-20333-01","So-10-20333-04","So-10-56965-01","So-21-28371-01","Sa-6-4253-02","Sa-21-82410-02","So-6-4253-01","So-21-28423-02","So-21-28425-02","So-8-6858-02","So-8-6685-03","Sa-6-3189-01","So-8-7024-01","So-21-28449-02","So-21-30218-03","Sa-21-30529-02","So-21-28449-04","So-21-30529-02")
+gpB<-c("So-21-29822-02","Sa-8-12129-01","Sa-8-12129-02","Sa-8-12129-03","Sa-8-12129-04","So-10-20006-01","So-10-20110-02","So-10-20110-03","So-10-20279-01","So-10-20279-02","So-10-20279-03","So-10-20302-01","So-10-20327-02","So-10-20333-05","So-10-20347-02","So-10-20347-03","So-10-56965-02","So-10-56965-03","So-21-1061629-02","Sa-21-82410-01","So-21-28423-01","So-8-7291-01","Sa-21-30147-02","So-6-51263-02","Sa-21-82410-03","Sa-6-3385-01","Sa-21-82410-04","So-21-28425-03","So-8-7539-01","Sa-21-30147-04","Sa-21-30507-01","Sa-21-30218-01","So-8-6685-01","So-8-7539-02","Sa-8-7085-01","So-6-3385-02","Sa-21-30507-02","Sa-21-30218-02","So-8-7539-03","Sa-6-4253-01","Sa-24-60424-03","Sa-21-30218-03","So-8-7539-04","Sa-8-7085-04","So-21-30522-02","So-21-28449-01","So-21-30218-02","So-8-11559-02","Sa-21-30515-02","So-21-30522-03","So-21-1061629-01","Sa-6-3189-04","So-10-20333-03") # => missing: Sa-6-3189-04
+gpC<-c("So-21-28371-04","So-21-30529-03","So-10-20302-03","So-10-20333-02","So-10-20347-01","So-10-20363-02","Sa-8-11559-01","Sa-21-28423-03","Sa-21-30147-01","So-21-30507-01","So-21-28425-01","Sa-21-30147-03","So-21-28423-03","So-8-6685-02","Sa-8-7085-02","Sa-6-51263-02","Sa-21-30529-03","Sa-8-11559-03","So-6-4452-01","So-21-30522-01","So-8-11559-01","Sa-6-3189-02","Sa-21-30515-01","Sa-8-7085-05","Sa-6-3189-03","Sa-8-7085-06","Sa-21-28423-02","Sa-21-28425-02","So-10-20006-03","Sa-24-60424-01")
+gpD<-c("So-21-28371-03","So-10-20117-01","So-10-20302-02","So-10-20363-01","So-6-51263-01","So-6-4253-02","So-6-3189-02","So-8-7024-03")
+gpE<-c("So-21-28371-02","So-21-30529-01","So-10-20363-03","So-8-6858-03","So-21-30507-02","So-6-3189-01","So-6-3189-03","Sa-8-7085-03","So-21-30218-01","So-8-7024-02","So-8-11559-03","So-21-1061629-03")
+```
+
+
+```{r}
+library(tidyverse)
+library(scales)
+library(ggplot2)
+library(ggpubr)
+library(dplyr)
+library(stringr)
+library(reshape2)
+library(rstatix)
+library(datarium)
+library(metaBLUE)
+
+options(contrasts = c("contr.sum","contr.poly")) 
+
+# creation des DF pour les 9 essais: ajout de l'essai à la DF + ajout d'un ID unique
+
+pheno_data_1<-read.delim("raw_repeats/Essai1_A.txt")
+#pheno_data_1$essai = c("A") 
+pheno_data_1$repetition = c("a") 
+#pheno_data_1$ID = c(1:129) 
+
+pheno_data_2<-read.delim("raw_repeats/Essai1_B.txt")
+#pheno_data_2$essai = c("A") 
+pheno_data_2$repetition = c("b") 
+#pheno_data_2$ID = c(130:258) 
+
+pheno_data_3<-read.delim("raw_repeats/Essai1_C.txt")
+#pheno_data_3$essai = c("A") 
+pheno_data_3$repetition = c("c") 
+#pheno_data_3$ID = c(259:387) 
+
+pheno_data_4<-read.delim("raw_repeats/Essai2_A.txt")
+#pheno_data_4$essai = c("B") 
+pheno_data_4$repetition = c("d") 
+#pheno_data_4$ID = c(388:516) 
+
+pheno_data_5<-read.delim("raw_repeats/Essai2_B.txt")
+#pheno_data_5$essai = c("B") 
+pheno_data_5$repetition = c("e") 
+#pheno_data_5$ID = c(517:645) 
+
+pheno_data_6<-read.delim("raw_repeats/Essai2_C.txt")
+#pheno_data_6$essai = c("B") 
+pheno_data_6$repetition = c("f") 
+#pheno_data_6$ID = c(646:774) 
+
+pheno_data_7<-read.delim("raw_repeats/Essai3_A.txt")
+#pheno_data_7$essai = c("C") 
+pheno_data_7$repetition = c("g") 
+#pheno_data_7$ID = c(775:903) 
+
+pheno_data_8<-read.delim("raw_repeats/Essai3_B.txt")
+#pheno_data_8$essai = c("C") 
+pheno_data_8$repetition = c("h") 
+#pheno_data_8$ID = c(904:1032) 
+
+pheno_data_9<-read.delim("raw_repeats/Essai3_C.txt")
+#pheno_data_9$essai = c("C") 
+pheno_data_9$repetition = c("i") 
+#pheno_data_9$ID = c(1033:1161) 
+
+pheno_data_all_9_repeats<-rbind(pheno_data_1,pheno_data_2,pheno_data_3,pheno_data_4,pheno_data_5,pheno_data_6,pheno_data_7,pheno_data_8,pheno_data_9)
+
+all_phenotypic_data<-read.delim("all_phenotypic_data.txt")
+
+all_phenotypic_data_type2<-all_phenotypic_data%>%select(Code_ADN,Type2)
+
+# Left join
+df2 <- merge(x=pheno_data_all_9_repeats,y=all_phenotypic_data_type2, 
+             by="Code_ADN", all.x=TRUE)
+#2groups
+df_type_groups_repeat<-df2%>%
+  mutate(group = case_when(
+      ((Code_ADN%in%gpA)) ~ "A",
+      ((Code_ADN%in%gpB)) ~ "B", 
+      ((Code_ADN%in%gpC)) ~ "C", 
+      ((Code_ADN%in%gpD)) ~ "D", 
+      ((Code_ADN%in%gpE)) ~ "E"))
+
+
+#####################
+#### regression with linear model
+#### for each trait 
+#### put E to A_E to have last group effect
+#####################
+
+pheno_data_all_9_repeats_VAR<-df_type_groups_repeat%>%select(Tsteriles,repetition,Type2, group, Code_ADN)
+
+pheno_data_all_9_repeats_VAR_no_missing_data<-na.omit(pheno_data_all_9_repeats_VAR)
+
+pheno_data_all_9_repeats_VAR_no_missing_data <- pheno_data_all_9_repeats_VAR_no_missing_data %>%
+    mutate(Type2 = recode(Type2, Late_flowering = 'ALate_flowering'))
+pheno_data_all_9_repeats_VAR_no_missing_data <- pheno_data_all_9_repeats_VAR_no_missing_data %>%
+    mutate(group = recode(group, E = 'A_E'))
+
+options(contrasts = c("contr.sum","contr.poly"))
+
+model<-lm(Tsteriles ~ repetition + Type2 + group, data= pheno_data_all_9_repeats_VAR_no_missing_data)
+
+summary(model)
+
+model
+```
