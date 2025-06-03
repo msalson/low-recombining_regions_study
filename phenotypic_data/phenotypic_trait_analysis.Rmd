@@ -39,8 +39,6 @@ library(metaBLUE)
 
 options(contrasts = c("contr.sum","contr.poly")) 
 
-# creation des DF pour les 9 essais: ajout de l'essai à la DF + ajout d'un ID unique
-
 pheno_data_1<-read.delim("raw_repeats/Essai1_A.txt")
 #pheno_data_1$essai = c("A") 
 pheno_data_1$repetition = c("a") 
@@ -88,7 +86,7 @@ pheno_data_9$repetition = c("i")
 
 pheno_data_all_9_repeats<-rbind(pheno_data_1,pheno_data_2,pheno_data_3,pheno_data_4,pheno_data_5,pheno_data_6,pheno_data_7,pheno_data_8,pheno_data_9)
 
-all_phenotypic_data<-read.delim("all_phenotypic_data.txt")
+all_phenotypic_data<-read.delim("phenotypic_data_Senegalese_dataset.txt")
 
 all_phenotypic_data_type2<-all_phenotypic_data%>%select(Code_ADN,Type2)
 
