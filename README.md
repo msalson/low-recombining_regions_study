@@ -1,4 +1,4 @@
-# Structural variants analysis in pearl millet using population genomic approach
+# Low-recombining regions analysis in pearl millet using population genomic approach
 
 This project is made for sharing the analysis and the scripts used for the study _Interplay between large low-recombining regions and overdominance in a plant genome?_. In this work, we identified putative structural variants in pearl millet using a population genomic approach ([Mérot 2020](https://doi.org/10.1111/mec.15500)). We then performed analysis to assess if the regions harbored expected hallmarks of pseudo-overdominance ([Gilbert et al. 2020](https://doi.org/10.1016/j.cub.2019.11.063 ), [Waller 2021](https://doi.org/10.1111/evo.14189), [Glémin 2022](https://doi.org/10.24072/pci.evolbiol.100531), [Abu-Wallad & Waller 2023](https://doi.org/10.24072/pcjournal.224)). The analysis performed in the study are listed below:
 
