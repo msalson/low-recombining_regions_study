@@ -13,7 +13,7 @@ This project is made for sharing the analysis and the scripts used for the study
 * [Genes content within the candidate regions](#genes-content-within-the-candidate-regions)
 * [SNPs calling WGS dataset](#snps-calling-wgs-dataset)
 
-The VCF files with the filtered SNPs of the Senegalese, the temporal, and the African datasets used in the study are deposited [here]([https://doi.org/10.23708/SN2T4A]).
+The VCF files with the filtered SNPs of the Senegalese, the temporal, and the African datasets used in the study are deposited [here](https://doi.org/10.23708/SN2T4A).
 
 ## Identification of the candidate regions using a population genomic approach
 
