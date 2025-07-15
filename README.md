@@ -19,17 +19,17 @@ The VCF files  with the filtered SNPs of the Senegalese, the temporal, and the A
 
 We used the R package [lostruct](https://github.com/petrelharp/local_pca) (v. 0.0.0.9000, [Li & Ralph 2019](https://academic.oup.com/genetics/article/211/1/289/5931130?login=false)) to detect candidate regions across the genome which can putatively harbor large structural variants such as inversions. The approach we used is similar as [Huang et al. 2020](https://doi.org/10.1111/mec.15428).
 
-We first detected and plotted genomic windows with a deviant population structure. The plots and the [script](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/Outlier_genomic_windows/Plot_outlier_genomic_windows.R?ref_type=heads) with brief description of the method can be found [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/tree/main/Outlier_genomic_windows?ref_type=heads). We displayed below the example for chromosome 3. Each point is a genomic window of 100 SNPs. Red windows present a population structure deviant from the rest of the genome.
+We first detected and plotted genomic windows with a deviant population structure. The plots and the [script](https://github.com/msalson/low-recombining_regions_study/blob/main/Outlier_genomic_windows/Plot_outlier_genomic_windows.R) with brief description of the method can be found [here](https://github.com/msalson/low-recombining_regions_study/tree/main/Outlier_genomic_windows). We displayed below the example for chromosome 3. Each point is a genomic window of 100 SNPs. Red windows present a population structure deviant from the rest of the genome.
 
 <img src="./Outlier_genomic_windows/img_outliers_genomic_windows/chr3_MDS2_figS2.png" alt="Alt text" title="MDS2 chr3" width=30% height=30% >
 
 Based on the identification of these genomic windows with a deviant population structure, we defined candidate regions which can putatively harbor large structural variants such as inversions. 
 
-Candidate regions were defined by clustering of the outlier genomic windows (in red above). The method and the scripts used for clustering and identification of the candidate regions is accessible [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/Outlier_genomic_windows/Define_candidate_regions.R). 
+Candidate regions were defined by clustering of the outlier genomic windows (in red above). The method and the scripts used for clustering and identification of the candidate regions is accessible [here](https://github.com/msalson/low-recombining_regions_study/blob/main/Outlier_genomic_windows/Define_candidate_regions.R). 
 
-The output of the script with the list of the candidate regions can be found [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/Outlier_genomic_windows/candidate_regions_spatial_dataset.csv). 
+The output of the script with the list of the candidate regions can be found [here](https://github.com/msalson/low-recombining_regions_study/blob/main/Outlier_genomic_windows/candidate_regions_spatial_dataset.csv). 
 
-The method has been implemented in a generic and adaptable R package accessible under the Gitlab repository [localPCA](https://forge.ird.fr/diade/dynadiv/inversions_detection_code/-/tree/main/localPCA), and described here: [Huynh et al.]() (to be published). This R package incorporates a last step which consists in concatenating the candidate regions which overlap on the same chromosome (ex: [chr3, MDS2 and MDS5](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/Outlier_genomic_windows/candidate_regions_spatial_dataset.csv)). This step is described in [Huynh et al.]() and allowed to obtain the final list of candidate regions analyzed in the study: 
+The method has been implemented in a generic and adaptable R package accessible under the GitHub repository [localPCA](https://github.com/stella-huynh/localPCA), and described here: [Huynh et al.]() (to be published). This R package incorporates a last step which consists in concatenating the candidate regions which overlap on the same chromosome (ex: [chr3, MDS2 and MDS5](https://github.com/msalson/low-recombining_regions_study/blob/main/Outlier_genomic_windows/candidate_regions_spatial_dataset.csv)). This step is described in [Huynh et al.]() and allowed to obtain the final list of candidate regions analyzed in the study: 
 
 
 | Region    | Start |   End   | Size (Mb) | 
@@ -44,11 +44,11 @@ The method has been implemented in a generic and adaptable R package accessible 
 
 ## Analysis of the candidate regions 
 
-The script to perform the additionnal analysis and get the plots for each candidate regions can be found [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/analysis_regions/candidate_regions_plots.R). The analysis consists in 1) performing local PCA across [each candidate region](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/tree/main/analysis_regions/regions), 2) determining the clusters of samples in the population, 3) plotting the mean heterozygosity of the samples per cluster, 4) performing Wilcoxon tests to compare the mean heterozygosity between the clusters of samples.
+The script to perform the additionnal analysis and get the plots for each candidate regions can be found [here](https://github.com/msalson/low-recombining_regions_study/blob/main/analysis_regions/candidate_regions_plots.R). The analysis consists in 1) performing local PCA across [each candidate region](https://github.com/msalson/low-recombining_regions_study/tree/main/analysis_regions/regions), 2) determining the clusters of samples in the population, 3) plotting the mean heterozygosity of the samples per cluster, 4) performing Wilcoxon tests to compare the mean heterozygosity between the clusters of samples.
 
 ### Local PCAs and kmean clustering 
 
-The first analysis is the obtention of the population structure across [each candidate region](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/tree/main/analysis_regions/regions), using the R package SNPRelate (v. 1.30.1). When the population was clearly structured in distinct clusters of samples, we used a kmean clustering approach (Hartigan and Wong 1979) to assign each sample to the different clusters. The number of clusters k used for this apporoach was visually defined. The plots of the population structure for each candidate region can be found [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/tree/main/analysis_regions/img) and we show below the example for chromosome 3. The coloration of samples highlight the different clusters of samples identified in the population. 
+The first analysis is the obtention of the population structure across [each candidate region](https://github.com/msalson/low-recombining_regions_study/tree/main/analysis_regions/regions), using the R package SNPRelate (v. 1.30.1). When the population was clearly structured in distinct clusters of samples, we used a kmean clustering approach (Hartigan and Wong 1979) to assign each sample to the different clusters. The number of clusters k used for this apporoach was visually defined. The plots of the population structure for each candidate region can be found [here](https://github.com/msalson/low-recombining_regions_study/tree/main/analysis_regions/img) and we show below the example for chromosome 3. The coloration of samples highlight the different clusters of samples identified in the population. 
 
 <img src="./analysis_regions/img/Local_PCA_chr3.png" alt="Alt text" title="Local PCA chr3" width=30% height=30% >
 
@@ -60,20 +60,20 @@ The mean heterozygosity per sample across each candidate region was obtained wit
 vcftools --vcf chrX_XXX_XXXMb.vcf --het --out chrx_XXX_XXMb
 ```
 
-The output files with the mean heterozygosity per sample across each candidate region are accessible [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/tree/main/analysis_regions/heterozygosity).
+The output files with the mean heterozygosity per sample across each candidate region are accessible [here](https://github.com/msalson/low-recombining_regions_study/tree/main/analysis_regions/heterozygosity).
 
-The plots with the mean heterozygosity per cluster can be found [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/tree/main/analysis_regions/img) and we show the chromosome 3 as an example:
+The plots with the mean heterozygosity per cluster can be found [here](https://github.com/msalson/low-recombining_regions_study/tree/main/analysis_regions/img) and we show the chromosome 3 as an example:
 
 <img src="./analysis_regions/img/Heterozygosity_chr3.png" alt="Alt text" title="Heterozygosity chr3" width=30% height=30% >
 
-For each candidate region, we compare the mean heterozygosity between each pair of clusters with Wilcoxon tests (see the script [candidate_regions_plots.R](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/analysis_regions/candidate_regions_plots.R)).
+For each candidate region, we compare the mean heterozygosity between each pair of clusters with Wilcoxon tests (see the script [candidate_regions_plots.R](https://github.com/msalson/low-recombining_regions_study/blob/main/analysis_regions/candidate_regions_plots.R).
 
 
 ## Visualization of the genotypes
 
 In the study, we visualized the genotypes of the SNPs contributing the most to the local population structure of the candidate region on chromosome 3. The aim was to better identify the haplotypes shaping the population in different clusters of samples.
 
-To do so, we used the script [tables_genotypes.R](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/matrix_of_genotypes/tables_genotypes.R).
+To do so, we used the script [tables_genotypes.R](https://github.com/msalson/low-recombining_regions_study/blob/main/matrix_of_genotypes/tables_genotypes.R).
 
 The analysis consists first in using the R package [PCAdapt](https://github.com/bcm-uga/pcadapt) (v. 4.3.3), to obtain the list of the SNPs which contribute the most to the local population structure. For this PCAdapt analysis, the VCF file has to be converted in a bed format with plink (v. 1.9) and the following command line:
 
@@ -81,15 +81,15 @@ The analysis consists first in using the R package [PCAdapt](https://github.com/
 plink --vcf spatial_dataset_chr3_101-189Mb.vcf --make-bed --out spatial_dataset_chr3_101-189Mb_BED
 ```
 
-We provide [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/tree/main/matrix_of_genotypes/data) the different files generated with plink and required for the PCAdapt analysis. 
+We provide [here](https://github.com/msalson/low-recombining_regions_study/blob/main/matrix_of_genotypes/data) the different files generated with plink and required for the PCAdapt analysis. 
 
-We then used the script [generate_tables_of_genotypes.py](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/matrix_of_genotypes/generate_tables_of_genotypes.py) to compute a matrix of the genotypes, with the positions of the SNPs on the x axis, and the samples of the population in the y axis. A VCF file with the samples ordered following the clusters identified in the population (see the section Analysis of the candidate regions: **kmean clustering**) has to be used, and can be found [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/tree/main/matrix_of_genotypes/data).
+We then used the script [generate_tables_of_genotypes.py](https://github.com/msalson/low-recombining_regions_study/blob/main/matrix_of_genotypes/generate_tables_of_genotypes.py) to compute a matrix of the genotypes, with the positions of the SNPs on the x axis, and the samples of the population in the y axis. A VCF file with the samples ordered following the clusters identified in the population (see the section Analysis of the candidate regions: **kmean clustering**) has to be used, and can be found [here](https://github.com/msalson/low-recombining_regions_study/blob/main/combine_datasets/combine_vcf.ipynb).
 
 This allows to obtain the following table of genotypes and to better vizualise the haplotypes shaping the population in distinct clusters of samples:
 
 <img src="./matrix_of_genotypes/matrix.png" alt="Alt text" title="Table of genotypes" width=40% height=40% >
 
-We perfomed an additionnal analysis which consists in combining the dataset of cultivated Senegalese samples with wild samples from Senegal, Mauritania (Western Africa) and Mali, Niger (Central Africa). The analysis and the scripts used are shared in the Jupyter Notebook [combine_vcf.ipynb](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/combine_datasets/combine_vcf.ipynb?ref_type=heads). 
+We perfomed an additionnal analysis which consists in combining the dataset of cultivated Senegalese samples with wild samples from Senegal, Mauritania (Western Africa) and Mali, Niger (Central Africa). The analysis and the scripts used are shared in the Jupyter Notebook [combine_vcf.ipynb](https://github.com/msalson/low-recombining_regions_study/blob/main/combine_datasets/combine_vcf.ipynb). 
 
 The aim was to test the hypothesis that the variant region on chr3 found in the cultivated population of Senegal might have been introgressed from wild relatives. The resulting matrix of genotypes is shown below, with first on the y axis the cultivated Senegalese samples and then the wild samples with Western African samples firstly and Central African secondly.  
 
@@ -113,7 +113,7 @@ We then used plink (v. 1.9) with the following command line for each chromosome 
 plink --vcf spatial_dataset_chrX_thin1000.vcf --r2 –ld-window-r2 0.0 --ld-window-kb 310000000 --ld-window 1000000 --out spatial_dataset_chrX_thin1000_plink.ld
 ```
 
-The corresponding result files are all accessible [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/tree/main/LD/r2_chr?ref_type=heads). We then plotted the r² values of the pair of SNPs for each chromosome with the script which can be found [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/LD/LD_plots.R?ref_type=heads). The plots for all chromosomes are accessible [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/tree/main/LD/img) and we presented the example of chromosome 6:
+The corresponding result files are all accessible [here](https://github.com/msalson/low-recombining_regions_study/tree/main/LD/r2_chr). We then plotted the r² values of the pair of SNPs for each chromosome with the script which can be found [here](https://github.com/msalson/low-recombining_regions_study/blob/main/LD/LD_plots.R). The plots for all chromosomes are accessible [here](https://github.com/msalson/low-recombining_regions_study/tree/main/LD/img) and we presented the example of chromosome 6:
 
 <img src="./LD/img/chr6_r2.png" alt="Alt text" title="LD plot chr6" width=40% height=40% >
 
@@ -125,9 +125,9 @@ To obtain the Fis, we first computed for each locus the observed number of heter
 vcftools --vcf spatial_dataset_126_samples.vcf --hardy
 ```
 
-The result output file is accessible [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/Fis/spatial_dataset_126_samples.vcf.hwe). We then used the python script [Fis.py](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/Fis/Fis.py?ref_type=heads) to parse the result file and calculate the inbreeding coefficient Fis for each SNP as follows: _(He-Ho)/He_. 
+The result output file is accessible [here](https://github.com/msalson/low-recombining_regions_study/blob/main/Fis/spatial_dataset_126_samples.vcf.hwe). We then used the python script [Fis.py](https://github.com/msalson/low-recombining_regions_study/blob/main/Fis/Fis.py) to parse the result file and calculate the inbreeding coefficient Fis for each SNP as follows: _(He-Ho)/He_. 
 
-Then, we used the script accessible [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/Fis/Plot_Fis.R?ref_type=heads) to obtain the mean Fis across the candidate regions and across the genome excluding the candidate regions. We compared the mean Fis across the regions with the rest of the genome with Wilcoxon tests. 
+Then, we used the script accessible [here](https://github.com/msalson/low-recombining_regions_study/blob/main/Fis/Plot_Fis.R) to obtain the mean Fis across the candidate regions and across the genome excluding the candidate regions. We compared the mean Fis across the regions with the rest of the genome with Wilcoxon tests. 
 
 We showed below the plot of the mean Fis across the genome and across each candidate region.
 
@@ -135,9 +135,9 @@ We showed below the plot of the mean Fis across the genome and across each candi
 
 ## Recombination rate estimation 
 
-We used [ReLERNN](https://github.com/kr-colab/ReLERNN) (v. 1.0.0, [Adrion et al. 2020](https://doi.org/10.1093/molbev/msaa038)) to obtain an estimation of the recombination rate across the genome. The command lines used can be found [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/recombination_rate_estimation/relernn.sh?ref_type=heads). The output file with the recombination rate estimated within non-overlapping windows is also accessible [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/recombination_rate_estimation/relernn_output/spatial_dataset_relernn.PREDICT.BSCORRECTED.txt?ref_type=heads). The script to obtain the plots of the estimated recombination rate across the chromosomes and compare the candidate regions with the rest of the genome using Wilcoxon tests is accessible [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/blob/main/recombination_rate_estimation/recombination_rate_plots.R?ref_type=heads). 
+We used [ReLERNN](https://github.com/kr-colab/ReLERNN) (v. 1.0.0, [Adrion et al. 2020](https://doi.org/10.1093/molbev/msaa038)) to obtain an estimation of the recombination rate across the genome. The command lines used can be found [here](https://github.com/msalson/low-recombining_regions_study/blob/main/recombination_rate_estimation/relernn.sh). The output file with the recombination rate estimated within non-overlapping windows is also accessible [here](https://github.com/msalson/low-recombining_regions_study/blob/main/recombination_rate_estimation/relernn_output/spatial_dataset_relernn.PREDICT.BSCORRECTED.txt). The script to obtain the plots of the estimated recombination rate across the chromosomes and compare the candidate regions with the rest of the genome using Wilcoxon tests is accessible [here](https://github.com/msalson/low-recombining_regions_study/blob/main/recombination_rate_estimation/recombination_rate_plots.R). 
 
-We displayed below an example of the plot obtained for chromosome 1, and the plots of the other chromosomes are shared [here](https://forge.ird.fr/diade/dynadiv/structural_variants_analysis_pearl_millet/-/tree/main/recombination_rate_estimation/img). The candidate region is highlighted in orange.
+We displayed below an example of the plot obtained for chromosome 1, and the plots of the other chromosomes are shared [here](https://github.com/msalson/low-recombining_regions_study/tree/main/recombination_rate_estimation/img). The candidate region is highlighted in orange.
 
 <img src="./recombination_rate_estimation/img/chr1_estimation_recombination_rate.png" alt="Alt text" title="Recombination rate" width=50% height=50% >
 
